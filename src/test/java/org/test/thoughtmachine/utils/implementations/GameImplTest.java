@@ -46,6 +46,20 @@ public class GameImplTest {
     }
 
     @Test
+    public void shouldThrowExceptionWhenShipPlacedOutsideOfBounds() {
+        board.initBoard(5);
+        List<Ship> ships = new ArrayList<>();
+        ships.add(new Ship(5, 3, Rotation.N));
+
+        try {
+            board.placeShips(ships);
+            fail("Exception missing");
+        } catch (ShipSimulatorException exception) {
+            Assert.assertEquals("Ship placed outside of bounds: Coordinate: 5, 3", exception.getMessage());
+        }
+    }
+
+    @Test
     public void shouldPerformMoveOperation() {
         board.initBoard(5);
         Ship ship = new Ship(0, 0, Rotation.E);

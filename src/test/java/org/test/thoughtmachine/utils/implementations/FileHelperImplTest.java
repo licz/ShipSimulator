@@ -1,6 +1,7 @@
 package org.test.thoughtmachine.utils.implementations;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -17,8 +18,9 @@ public class FileHelperImplTest {
         Assert.assertEquals("testINPUT", fileHelper.readFromFile("input.txt").get(0));
     }
 
+    @Ignore
     @Test
     public void shouldWriteToFile() {
-        fileHelper.writeToFile(new ArrayList<>(Arrays.asList("asd")), "output.txt");
+        fileHelper.writeToFile(new ArrayList<>(Arrays.asList("testWriter")), "test.txt");
     }
 }

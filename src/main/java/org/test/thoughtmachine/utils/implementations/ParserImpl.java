@@ -1,19 +1,20 @@
 package org.test.thoughtmachine.utils.implementations;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.test.thoughtmachine.commons.*;
 import org.test.thoughtmachine.exceptions.ShipSimulatorException;
 import org.test.thoughtmachine.utils.interfaces.Parser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
  * Created by leszek on 21/01/17.
  */
 public class ParserImpl implements Parser {
+
+    private static final Logger logger = LoggerFactory.getLogger(ParserImpl.class);
 
     private static final String OPEN_BRACKET ="(";
     private static final String CLOSE_BRACKET =")";
@@ -22,11 +23,13 @@ public class ParserImpl implements Parser {
 
     @Override
     public int parseSizeLine(String line) {
+        logger.info("Parsing size line: " + line);
         return Integer.parseInt(line.trim());
     }
 
     @Override
     public List<Ship> parseCoordinatesLine(String line) {
+        logger.info("Parsing coordinate line: " + line);
         List<Ship> ships = new ArrayList<>();
         try {
             String [] unparsedShips = line.split("\\)");
@@ -46,6 +49,7 @@ public class ParserImpl implements Parser {
 
     @Override
     public Operation parseOperationLine(String line) {
+        logger.info("Parsing operation line: " + line);
         Operation operation = null;
         try {
             String [] unparsedOperation = line.split("\\)");
@@ -77,6 +81,7 @@ public class ParserImpl implements Parser {
 
     @Override
     public List<String> generateOutput(List<Ship> ships) {
+        logger.info("Generating output");
         List<String> lines = new ArrayList<>();
         for (Ship ship : ships) {
             StringBuilder stringBuilder = new StringBuilder();
